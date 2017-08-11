@@ -1,0 +1,62 @@
+{% extends "@Core/skeleton.html.twig" %}
+
+{% block content %}
+	<div class="modal fade weatherModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Dane pogodowe</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table table-bordered" width="100%">
+						<tr>
+							<td width="40%">Szerokość geograficzna</td>
+							<td id="lat"></td>
+						</tr>
+						<tr>
+							<td width="40%">Długość geograficzna</td>
+							<td id="lon"></td>
+						</tr>
+						<tr>
+							<td width="40%">Miasto</td>
+							<td id="city"></td>
+						</tr>
+						<tr>
+							<td width="40%">Temperatura</td>
+							<td id="temperature"></td>
+						</tr>
+						<tr>
+							<td width="40%">Wiatr</td>
+							<td id="wind"></td>
+						</tr>
+						<tr>
+							<td width="40%">Zachmurzenie</td>
+							<td id="clouds"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						Zamknij
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-12 mapColumn">
+		<div class="googleMap"></div>
+	</div>
+{% endblock %}
+
+{% block scripts %}
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOK26XX0-UdaBtS0WjV4ISCEks1dpOgx0"> </script>
+	<script type="text/javascript" src="{{ asset("js/gmaps.js") }}"></script>
+	<script type="text/javascript" src="{{ asset("js/panel.js") }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $(".mapColumn").mapPanel();
+		});
+	</script>
+{% endblock %}

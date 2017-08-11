@@ -1,0 +1,84 @@
+{% extends "@Core/skeleton.html.twig" %}
+
+{% block content %}
+	<div class="col-lg-12">
+		<h3>Ostatnie wyszukiwania</h3>
+
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Data</th>
+					<th>Dł. geograficzna</th>
+					<th>Szer. geograficzna</th>
+					<th>Miasto</th>
+					<th>Temperatura</th>
+					<th>Wiatr</th>
+					<th>Zachmurzenie</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% if lastSearches is defined and lastSearches is not empty %}
+					{% for lastSearch in lastSearches %}
+						<tr>
+							<td>
+								{{ lastSearch.createdAt | date("Y-m-d H:i:s") }}
+							</td>
+							<td>
+								{{ lastSearch.lat }}
+							</td>
+							<td>
+								{{ lastSearch.lon }}
+							</td>
+							<td>
+								{{ lastSearch.city }}
+							</td>
+							<td>
+								Teraz: {{ lastSearch.temperatureNow }}C <br/>
+								Minimalna: {{ lastSearch.temperatureMin }}C <br/>
+								Maksymalna: {{ lastSearch.temperatureMax }}C
+							</td>
+							<td>
+								Kierunek: {{ lastSearch.windDirection }}C <br/>
+								Prędkość: {{ lastSearch.windSpeed }}
+							</td>
+							<td>
+								{{ lastSearch.clouds }}
+							</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+			</tbody>
+
+		</table>
+	</div>
+
+	<div class="col-lg-12">
+		<h3>Statystyki</h3>
+
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th>Średnia temperatura</th>
+					<td>{{ statistics.temperatures.temperatureAvg | round(2) }}</td>
+				</tr>
+				<tr>
+					<th>Minimalna temperatura</th>
+					<td>{{ statistics.temperatures.temperatureMin | round(2) }}</td>
+				</tr>
+				<tr>
+					<th>Maksymalna temperatura</th>
+					<td>{{ statistics.temperatures.temperatureMax | round(2) }}</td>
+				</tr>
+				<tr>
+					<th>Liczba wszystkich wyszukiwań</th>
+					<td>{{ statistics.totalSearchesCount }}</td>
+				</tr>
+				<tr>
+					<th>Najczęściej wyszukiwane miasto</th>
+					<td>{{ statistics.mostSearchedCity }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
